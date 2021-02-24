@@ -17,7 +17,7 @@ class Page extends React.Component {
 				<div className={styles.container} key="3">
 					<div className={styles.leftMenu} key="4"></div>
 					<div className={styles.content} key="5">
-						<Square step="20"/>
+						<Square width="50" height="30" step="20" speed="300"/>
 					</div>
 				</div>
 			]
