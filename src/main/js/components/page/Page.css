@@ -1,0 +1,23 @@
+:local {
+	.header {
+		height: 60px;
+		background: #2a3347;
+		}
+	
+	.topMenu {
+		height: 20px;
+		}
+	
+	.container {}
+	
+	.leftMenu {
+		display: inline-block;
+		width: 16%;
+		min-width: 300px;
+		height: 100%;
+		}
+		
+	.content {
+		/*display: inline-block;*/
+		}
+	}

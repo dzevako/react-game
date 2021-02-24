@@ -1,0 +1,10 @@
+:local {
+	.square {
+		height: 600px;
+        width: 1000px;
+        margin: auto;
+		background: #9fc5d4;
+        border: 5px solid #797979;
+        position: relative;
+		}
+	}
