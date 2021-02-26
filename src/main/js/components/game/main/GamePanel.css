@@ -1,5 +1,5 @@
 :local {
-	.square {
+	.gameField {
         margin: auto;
 		background: #9fc5d4;
         border: 5px solid #797979;

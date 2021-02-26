@@ -1,0 +1,15 @@
+:local {
+	.controlPanel {
+        padding: 16px;
+		background: #e2e2e2;
+		}
+    .startButton {
+        height: 32px;
+        width: 120px;
+        /*background: #eb992e;*/
+        }
+    .score {
+        font-size: 32;
+        color: greenyellow
+        }
+	}

@@ -1,6 +1,6 @@
-import Target from '../target/Target.jsx';
-import SnakeElement from '../snake/SnakeElement.jsx';
-import styles from './Square.css';
+import Target from '../../target/Target.jsx';
+import SnakeElement from '../../snake/SnakeElement.jsx';
+import styles from './GamePanel.css';
 
 const React = require('react');
 const KeyboardEventHandler = require('react-keyboard-event-handler');
@@ -8,7 +8,7 @@ const KeyboardEventHandler = require('react-keyboard-event-handler');
 /**
  * Главное поле игры
 */
-class Square extends React.Component {
+class GamePanel extends React.Component {
 
     roundId = null;
     left = 'left';
@@ -42,10 +42,11 @@ class Square extends React.Component {
     roundStep() {
         let {target, snake, direction, crash} = this.state;
             
-        const frontElement = this.snakeStep(snake[0], direction);
+        const frontElement = this.getNextStep(snake[0], direction);
         console.log(frontElement.x + " " + frontElement.y)
-        if (target.x === frontElement.x && target.y === frontElement.y){
+        if (target.x === frontElement.x && target.y === frontElement.y) {
             target = this.getNewTarget();
+            snake.unshift(frontElement);
         } else {
             if (this.moveIsValid(snake, frontElement)) {
                 snake.pop();
@@ -59,7 +60,7 @@ class Square extends React.Component {
         this.setState({target, snake, crash})
     }
 
-    snakeStep(frontElement, direction) {
+    getNextStep(frontElement, direction) {
         let x = frontElement.x;
         let y = frontElement.y;
         switch (direction) {
@@ -102,7 +103,7 @@ class Square extends React.Component {
             height: height * step + "px",
         };
 
-        const cm = styles.square + (crash ? " " + styles.crash : ""); 
+        const cm = styles.gameField + (crash ? " " + styles.crash : ""); 
 	    return (
             <div className={cm} style={style}>
                 <Target x={target.x} y={target.y} size={this.props.step}/>
@@ -140,4 +141,4 @@ class Square extends React.Component {
     }
 }
 
-export default Square;
+export default GamePanel;

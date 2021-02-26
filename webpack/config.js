@@ -12,8 +12,8 @@ const resolve = require('./resolve');
 
 console.log('Reading webpack config...');
 
-//console.log('entry.index = ' + path.join(define.src, 'app.js'));
-//console.log('output.path = ' + path.resolve(__dirname, "../src/main/resources/static/built"));
+console.log('entry.index = ' + path.join(define.src, 'app.js'));
+console.log('output.path = ' + path.resolve(__dirname, "../src/main/resources/static/built"));
 
 module.exports = {
 
@@ -24,9 +24,9 @@ module.exports = {
     },
     
     output: {
-		path: define.staticPath,
+		path: define.buildPath,
 		//path: path.resolve(__dirname, "../src/main/resources/static"),
-		filename: './built/bundle.js',
+		filename: 'index.js',
 		//publicPath : path.resolve(__dirname, "../target/classes/static")
 	},
     
