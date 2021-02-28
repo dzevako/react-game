@@ -16,23 +16,40 @@ class Game extends React.Component {
     down = 'down';
     leftRight = [this.left, this.right];
     upDown = [this.up, this.down];
+    speed = 1000;
+    boost = 0;
 
     constructor(props) {
         super(props);
 
         this.state = {crash: true,
                       score: 0};
-
-        this.startRound = this.startRound.bind(this);
     }
 
-    startRound() {
+    startRound = () => {
+
+        this.speed = this.props.speed;
+
         this.setState({target: this.getNewTarget(),
                        snake: [{x: 39, y: 7}, {x: 38, y: 7}, {x: 37, y: 7}],
                        direction: this.right,
                        crash: false,
                        score: 0})
-        this.roundId = setInterval(() => this.roundStep(), this.props.speed);
+
+        this.start();
+    }
+
+    start() {
+        this.roundId = setInterval(() => this.roundStep(), this.speed);
+    }
+
+    restartWithBoost() {
+        if (this.boost == 0) {
+            return;
+        }
+        clearInterval(this.roundId);
+        this.speed = this.speed - this.speed * this.boost / 100;
+        this.start();
     }
 
     stopRound() {
@@ -47,6 +64,7 @@ class Game extends React.Component {
             target = this.getNewTarget();
             score = score + 1;
             snake.unshift(frontElement);
+            this.restartWithBoost();
         } else {
             if (this.moveIsValid(snake, frontElement)) {
                 snake.pop();
@@ -92,6 +110,11 @@ class Game extends React.Component {
 
         return true;
     }
+
+    onBoostChange = (value) => {
+        this.boost = (!value || value < 1 || value > 50) ? 0 : value;
+        console.log("setBoost: " + this.boost)
+    }
 	
 	render() {
         const {target, snake, crash, score} = this.state;
@@ -110,11 +133,12 @@ class Game extends React.Component {
                 />
                 <ControlPanel 
                     onClick={crash && this.startRound}
-                    score = {score}
+                    score={score}
+                    onBoostChange={this.onBoostChange}
                 />
                 <KeyboardEventHandler
                     handleKeys={[left, right, up, down]}
-                    onKeyEvent={(key, e) => this.processChangeDirection(key)} 
+                    onKeyEvent={(key, e) => this.handleChangeDirection(key)} 
                 />
             </div>
 		)
@@ -124,7 +148,7 @@ class Game extends React.Component {
         return {x : this.getRandomInt(50), y : this.getRandomInt(30)};
     }
 
-    processChangeDirection(key) {
+    handleChangeDirection(key) {
         let {direction} = this.state;
 
         // Forbid turn for 180 degrees

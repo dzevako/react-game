@@ -25,11 +25,24 @@
 
     .disabled {
         background-color: #ccc !important;
+        color: grey !important;
         }
 
     .score {
         font-size: 32px;
         color: #eb992e;
         vertical-align: middle;
+        float: right;
         }
+    .boost {
+        color: #24c524;
+        font-size: 24px;
+        vertical-align: middle;
+        }
+        .boost input {
+            height: 32px;
+            width: 40px;
+            margin: 0 8px;
+            padding: 0 4px;
+            }
 	}

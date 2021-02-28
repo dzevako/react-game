@@ -12,12 +12,33 @@ class ControlPanel extends React.Component {
         onClick && onClick();
     }
 
+    handleBoostChange= (value) => {
+        const {onBoostChange} = this.props;
+        onBoostChange && onBoostChange(value);
+    }
+
+    mayBeDisabled = (style, disabled) => {
+        return style + (disabled ? " " + styles.disabled : "");
+    }
+
 	render() {
         const {onClick, score} = this.props;
-        const cm = styles.startButton + (!onClick ? " " + styles.disabled : "");
+
 	    return (
             <div className={styles.controlPanel}>
-                <button disabled={!onClick} className={cm} onClick={this.handleClick}>START</button>
+                <button disabled={!onClick} 
+                    className={this.mayBeDisabled(styles.startButton, !onClick)} 
+                    onClick={this.handleClick}>START
+                </button>
+                <div className={styles.boost}>
+                    Boost: 
+                    <input 
+                        disabled={!onClick} 
+                        className={this.mayBeDisabled(styles.boost, !onClick)} 
+                        onChange={(e) => this.handleBoostChange(e.target.value)} 
+                    />
+                    %
+                </div>
                 <div className={styles.score}>Score: {score}</div>
             </div>
 		);
