@@ -23,7 +23,8 @@ class Game extends React.Component {
         this.state = {target: this.getNewTarget(),
                       snake: [{x: 39, y: 7}, {x: 38, y: 7}, {x: 37, y: 7}],
                       direction: this.right,
-                      crash: false};
+                      crash: false,
+                      score: 0};
     }
 
     /*UNSAFE_componentWillReceiveProps(nextProps) {
@@ -43,12 +44,13 @@ class Game extends React.Component {
     }
 
     roundStep() {
-        let {target, snake, direction, crash} = this.state;
+        let {target, snake, direction, crash, score} = this.state;
             
         const frontElement = this.getNextStep(snake[0], direction);
         console.log(frontElement.x + " " + frontElement.y)
         if (target.x === frontElement.x && target.y === frontElement.y) {
             target = this.getNewTarget();
+            score = score + 1;
             snake.unshift(frontElement);
         } else {
             if (this.moveIsValid(snake, frontElement)) {
@@ -60,7 +62,7 @@ class Game extends React.Component {
             }
         }
 
-        this.setState({target, snake, crash})
+        this.setState({target, snake, crash, score})
     }
 
     getNextStep(frontElement, direction) {
@@ -99,7 +101,7 @@ class Game extends React.Component {
     }
 	
 	render() {
-        const {target, snake, crash} = this.state;
+        const {target, snake, crash, score} = this.state;
         const {width, height, step} = this.props;
         const {left, right, up, down} = this;
         console.log("Game:" + width)
@@ -115,6 +117,7 @@ class Game extends React.Component {
                 />
                 <ControlPanel 
                     onClick={() => this.startRound()}
+                    score = {score}
                 />
                 <KeyboardEventHandler
                     handleKeys={[left, right, up, down]}
