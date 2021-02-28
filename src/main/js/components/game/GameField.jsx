@@ -22,9 +22,11 @@ class GameField extends React.Component {
 	    return (
             <div className={cm} style={style}>
 
-                <Target x={target.x} y={target.y} size={step}/>
+                {target && (
+                    <Target x={target.x} y={target.y} size={step}/>
+                )}
 
-                {snake.map((el, index) => {
+                {snake && snake.map((el, index) => {
                     return (
                         <SnakeElement x={el.x} y={el.y} size={step} key={index}/>
                     );

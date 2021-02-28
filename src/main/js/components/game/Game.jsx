@@ -20,22 +20,16 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {target: this.getNewTarget(),
-                      snake: [{x: 39, y: 7}, {x: 38, y: 7}, {x: 37, y: 7}],
-                      direction: this.right,
-                      crash: false,
+        this.state = {crash: false,
                       score: 0};
     }
 
-    /*UNSAFE_componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-        if (nextProps.onComplete) {
-            this.startRound();
-            nextProps.onComplete();
-        }
-    }*/
-
     startRound() {
+        this.setState({target: this.getNewTarget(),
+                       snake: [{x: 39, y: 7}, {x: 38, y: 7}, {x: 37, y: 7}],
+                       direction: this.right,
+                       crash: false,
+                       score: 0})
         this.roundId = setInterval(() => this.roundStep(), this.props.speed);
     }
 
