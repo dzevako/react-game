@@ -1,0 +1,30 @@
+:local {
+	.header {
+		height: 60px;
+		background: #2a3347;
+		color: azure;
+		font-size: 32px;
+		letter-spacing: 48px;
+		text-align: center;
+		line-height: 60px;
+		}
+	
+	.topMenu {
+		height: 20px;
+		}
+	
+	.flexContainer {
+		display: table;
+		margin: auto;
+		}
+
+	.flexContent {
+		display: inline-flex;
+		background: rgb(213, 229, 235);
+		}
+	}
+
+	body {
+		margin: 0;
+		background: #b7b681;
+	}

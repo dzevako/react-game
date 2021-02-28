@@ -1,31 +1,148 @@
-//import Block from '../block/Block.jsx';
+import GameField from './GameField.jsx';
 import ControlPanel from './controls/ControlPanel.jsx';
-import GamePanel from './main/GamePanel.jsx';
-import styles from './Game.css';
 
 const React = require('react');
+const KeyboardEventHandler = require('react-keyboard-event-handler');
 
 /**
- * Игра
- */
+ * Главное поле игры
+*/
 class Game extends React.Component {
 
+    roundId = null;
+    left = 'left';
+    right = 'right';
+    up = 'up';
+    down = 'down';
+    leftRight = [this.left, this.right];
+    upDown = [this.up, this.down];
 
+    constructor(props) {
+        super(props);
+
+        this.state = {target: this.getNewTarget(),
+                      snake: [{x: 39, y: 7}, {x: 38, y: 7}, {x: 37, y: 7}],
+                      direction: this.right,
+                      crash: false};
+    }
+
+    /*UNSAFE_componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if (nextProps.onComplete) {
+            this.startRound();
+            nextProps.onComplete();
+        }
+    }*/
+
+    startRound() {
+        this.roundId = setInterval(() => this.roundStep(), this.props.speed);
+    }
+
+    stopRound() {
+        clearInterval(this.roundId);
+    }
+
+    roundStep() {
+        let {target, snake, direction, crash} = this.state;
+            
+        const frontElement = this.getNextStep(snake[0], direction);
+        console.log(frontElement.x + " " + frontElement.y)
+        if (target.x === frontElement.x && target.y === frontElement.y) {
+            target = this.getNewTarget();
+            snake.unshift(frontElement);
+        } else {
+            if (this.moveIsValid(snake, frontElement)) {
+                snake.pop();
+                snake.unshift(frontElement);
+            } else {
+                crash = true;
+                this.stopRound();
+            }
+        }
+
+        this.setState({target, snake, crash})
+    }
+
+    getNextStep(frontElement, direction) {
+        let x = frontElement.x;
+        let y = frontElement.y;
+        switch (direction) {
+            case this.left: x = x - 1; break;
+            case this.right: x = x + 1; break;
+            case this.up: y = y - 1; break;
+            case this.down: y = y + 1; break;
+        }
+
+        return {x, y};
+    }
+
+    moveIsValid(snake, frontElement) {
+        const {width, height} = this.props;
+        const x = frontElement.x;
+        const y = frontElement.y;
+        if (x < 0 || y < 0 || x >= width || y >= height) {
+            return false;
+        }
+
+        const lastIndex = snake.length - 1;
+        const hitch = snake.filter((item, index) => {
+            return index != lastIndex && item.x == x && item.y == y
+        });
+
+        console.log(hitch.length)
+
+        if (hitch.length > 0) {
+            return false;
+        }
+
+        return true;
+    }
 	
 	render() {
-	return (
-			[
-				<div className={styles.header} key="1">SNAKE</div>,
-				<div className={styles.topMenu} key="2"></div>,
-				<div className={styles.flexContainer} key="3">
-					<div className={styles.flexContent} key="4">
-						<GamePanel width="50" height="30" step="20" speed="300"/>
-						<ControlPanel/>
-					</div>
-				</div>
-			]
+        const {target, snake, crash} = this.state;
+        const {width, height, step} = this.props;
+        const {left, right, up, down} = this;
+        console.log("Game:" + width)
+	    return (
+            <div>
+                <GameField 
+                    width={width} 
+                    height={height} 
+                    step={step} 
+                    target={target} 
+                    snake={snake} 
+                    crash={crash}
+                />
+                <ControlPanel 
+                    onClick={() => this.startRound()}
+                />
+                <KeyboardEventHandler
+                    handleKeys={[left, right, up, down]}
+                    onKeyEvent={(key, e) => this.processChangeDirection(key)} 
+                />
+            </div>
 		)
 	}
+
+    getNewTarget() {
+        return {x : this.getRandomInt(50), y : this.getRandomInt(30)};
+    }
+
+    processChangeDirection(key) {
+        let {direction} = this.state;
+
+        // Forbid turn for 180 degrees
+        if (this.upDown.indexOf(key) > -1 && this.upDown.indexOf(direction) > -1
+        || this.leftRight.indexOf(key) > -1 && this.leftRight.indexOf(direction) > -1) {
+            return;
+        }
+        
+        this.setState({direction : key});
+    }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
 }
 
 export default Game;

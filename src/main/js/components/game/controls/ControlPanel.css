@@ -3,13 +3,19 @@
         padding: 16px;
 		background: #e2e2e2;
 		}
+        .controlPanel > * {
+            display: inline-block;
+            margin-right: 32px;
+            }
+
     .startButton {
         height: 32px;
         width: 120px;
         /*background: #eb992e;*/
         }
     .score {
-        font-size: 32;
-        color: greenyellow
+        font-size: 32px;
+        color: rgb(255, 106, 47);
+        vertical-align: middle;
         }
 	}

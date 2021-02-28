@@ -7,19 +7,13 @@ const React = require('react');
  */
 class Target extends React.Component {
 
-    constructor(props) {
-        super(props);
-        //this.state = {target: {x : 5, y : 7}};
-        //this.state = {target: {x : this.getRandomInt(50), y : this.getRandomInt(30)}};
-    }
-
 	render() {
         const {x, y, size} = this.props;
         const style = {
             width: size + "px",
             height: size + "px",
-            left: x * size,
-            top: y * size
+            left: x * size + "px",
+            top: y * size + "px"
           };
 	    return (
             <div className={styles.target + " " + styles.blink} style={style} />

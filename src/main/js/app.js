@@ -1,4 +1,4 @@
-import Game from './components/game/Game';
+import Page from './components/page/Page';
 
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -9,7 +9,7 @@ const ReactDOM = require('react-dom');
 class App extends React.Component {
 
 	render() {
-        return <Game />
+        return <Page />
     }
 }
 
