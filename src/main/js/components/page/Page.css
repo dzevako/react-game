@@ -13,18 +13,13 @@
 		height: 20px;
 		}
 	
-	.flexContainer {
+	.container {
 		display: table;
 		margin: auto;
 		}
-
-	.flexContent {
-		display: inline-flex;
-		background: rgb(213, 229, 235);
-		}
 	}
 
-	body {
-		margin: 0;
-		background: #b7b681;
-	}
+body {
+	margin: 0;
+	background: #b7b681;
+}

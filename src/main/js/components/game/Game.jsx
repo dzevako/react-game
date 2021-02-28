@@ -20,8 +20,10 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {crash: false,
+        this.state = {crash: true,
                       score: 0};
+
+        this.startRound = this.startRound.bind(this);
     }
 
     startRound() {
@@ -39,9 +41,8 @@ class Game extends React.Component {
 
     roundStep() {
         let {target, snake, direction, crash, score} = this.state;
-            
         const frontElement = this.getNextStep(snake[0], direction);
-        console.log(frontElement.x + " " + frontElement.y)
+
         if (target.x === frontElement.x && target.y === frontElement.y) {
             target = this.getNewTarget();
             score = score + 1;
@@ -85,8 +86,6 @@ class Game extends React.Component {
             return index != lastIndex && item.x == x && item.y == y
         });
 
-        console.log(hitch.length)
-
         if (hitch.length > 0) {
             return false;
         }
@@ -98,7 +97,7 @@ class Game extends React.Component {
         const {target, snake, crash, score} = this.state;
         const {width, height, step} = this.props;
         const {left, right, up, down} = this;
-        console.log("Game:" + width)
+
 	    return (
             <div>
                 <GameField 
@@ -110,7 +109,7 @@ class Game extends React.Component {
                     crash={crash}
                 />
                 <ControlPanel 
-                    onClick={() => this.startRound()}
+                    onClick={crash && this.startRound}
                     score = {score}
                 />
                 <KeyboardEventHandler

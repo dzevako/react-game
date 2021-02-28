@@ -11,11 +11,25 @@
     .startButton {
         height: 32px;
         width: 120px;
-        /*background: #eb992e;*/
+        background: #eb992e;
+        border: none;
+        color: white;
+        letter-spacing: 4px;
         }
+        .startButton:hover {
+            background: #d38c2e;
+            }
+        .startButton:active {
+            background: #b8761f;
+            }
+
+    .disabled {
+        background-color: #ccc !important;
+        }
+
     .score {
         font-size: 32px;
-        color: rgb(255, 106, 47);
+        color: #eb992e;
         vertical-align: middle;
         }
 	}

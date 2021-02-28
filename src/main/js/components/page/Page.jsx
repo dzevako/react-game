@@ -13,8 +13,8 @@ class Page extends React.Component {
 		return (
 			[
 				<div className={styles.header} key="1">SNAKE</div>,
-				<div className={styles.flexContainer} key="2">
-					<Game width="50" height="30" step="20" speed="300" className={styles.flexContent}/>
+				<div className={styles.container} key="2">
+					<Game width="50" height="30" step="20" speed="300"/>
 				</div>
 			]
 		)

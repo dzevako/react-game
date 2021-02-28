@@ -12,13 +12,14 @@ class GameField extends React.Component {
 	render() {
 
         const {width, height, step, target, snake, crash} = this.props;
-        console.log(width)
+
         const style = {
             width: width * step + "px",
             height: height * step + "px",
         };
 
-        const cm = styles.gameField + (crash ? " " + styles.crash : ""); 
+        const cm = styles.gameField + (crash ? " " + styles.crash : "");
+
 	    return (
             <div className={cm} style={style}>
 

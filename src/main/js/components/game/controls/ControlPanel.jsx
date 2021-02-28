@@ -13,10 +13,12 @@ class ControlPanel extends React.Component {
     }
 
 	render() {
+        const {onClick, score} = this.props;
+        const cm = styles.startButton + (!onClick ? " " + styles.disabled : "");
 	    return (
             <div className={styles.controlPanel}>
-                <button className={styles.startButton} onClick={this.handleClick}>Start</button>
-                <div className={styles.score}>Score: {this.props.score}</div>
+                <button disabled={!onClick} className={cm} onClick={this.handleClick}>START</button>
+                <div className={styles.score}>Score: {score}</div>
             </div>
 		);
 	}
