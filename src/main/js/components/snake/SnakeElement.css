@@ -1,0 +1,8 @@
+:local {
+	.snakeElement {
+        border-radius: 8px;
+		background: #9a4900;
+        box-sizing: border-box;
+        position: absolute;
+		}
+	}

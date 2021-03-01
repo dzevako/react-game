@@ -1,0 +1,14 @@
+:local {
+	.gameField {
+        margin: auto;
+		background: #9fc5d4;
+        border: 5px solid #797979;
+        position: relative;
+		}
+
+	.crash {
+        background: #f1a5af;
+		border-color: #b76570;
+		transition: background .5s, border-color .5s;
+		}
+	}

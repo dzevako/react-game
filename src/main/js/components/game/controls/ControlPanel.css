@@ -1,0 +1,48 @@
+:local {
+	.controlPanel {
+        padding: 16px;
+		background: #e2e2e2;
+		}
+        .controlPanel > * {
+            display: inline-block;
+            margin-right: 32px;
+            }
+
+    .startButton {
+        height: 32px;
+        width: 120px;
+        background: #eb992e;
+        border: none;
+        color: white;
+        letter-spacing: 4px;
+        }
+        .startButton:hover {
+            background: #d38c2e;
+            }
+        .startButton:active {
+            background: #b8761f;
+            }
+
+    .disabled {
+        background-color: #ccc !important;
+        color: grey !important;
+        }
+
+    .score {
+        font-size: 32px;
+        color: #eb992e;
+        vertical-align: middle;
+        float: right;
+        }
+    .boost {
+        color: #24c524;
+        font-size: 24px;
+        vertical-align: middle;
+        }
+        .boost input {
+            height: 32px;
+            width: 40px;
+            margin: 0 8px;
+            padding: 0 4px;
+            }
+	}
